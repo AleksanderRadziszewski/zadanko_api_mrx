@@ -1,18 +1,18 @@
 from django.shortcuts import render
 from django.views import View
 
-from Articles.forms import ArticlesForm
-from Articles.models import Articles
+from Articles.forms import ArticleForm
+from Articles.models import Article
 
 
 class ArticlesView(View):
     def get(self,request):
-        form=ArticlesForm()
+        form=ArticleForm()
         return render(request, "Blog/form.html", {"form":form})
     def post(self,request):
-        form=ArticlesForm(request.POST)
+        form=ArticleForm(request.POST)
         if form.is_valid():
-            Articles.objects.create(**form.cleaned_data)
+            Article.objects.create(**form.cleaned_data)
         return render(request, "Blog/form.html", {"form":form})
 
 # Create your views here.
