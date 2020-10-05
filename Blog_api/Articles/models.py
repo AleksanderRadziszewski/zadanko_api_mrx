@@ -7,5 +7,4 @@ class Articles(models.Model):
     modified = models.DateTimeField(null=True,auto_now=True)
     pub_date = models.DateTimeField(null=True,auto_now_add=True)
     comments_count = models.IntegerField()
-
 # Create your models here.
