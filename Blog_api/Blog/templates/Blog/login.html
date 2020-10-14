@@ -1,0 +1,27 @@
+
+{% if not user.is_authenticated %}
+    <div style="text-align: center">
+    <h3>Enter your username and password </h3>
+        <form method='post' style="text-align: center">
+            {% csrf_token %}
+            {{ form }}
+            <input class="btn btn-primary mr-2" type="submit" value="Sign in">
+        </form>
+
+        <a href="{% url "create profile" %}">
+            <button>create profile</button>
+        </a>
+    {% endif %}
+    </div>
+        {% if user.is_authenticated %}
+             <h8 style="float:right;margin-right: 4px">Hi {{ user.first_name }} !</h8>
+            <a href="{% url "logout"%}"><button>log out</button></a>
+            <a href="{% url "products list"%}"><button>products list</button></a>
+            <a href="{% url "articles list"%}"><button>articles list</button></a>
+            <a href="{% url "comments list"%}"><button>comments list</button></a>
+            <a href="{% url "entry"%}"><button>entry</button></a>
+
+        {% endif %}
+    </div>
+
+</div>

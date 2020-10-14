@@ -1,0 +1,7 @@
+{% if  user.is_authenticated %}
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="add" class="btn btn-primary btn-sm mr-2 my-lg-n4">
+</form>
+{% endif %}

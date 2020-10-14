@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 
 
+
 SECRET_KEY = 'uk8gs7r-$9smxe709kur=5m&-5_4zk(zttu1&l$9ry)^c%bht+'
 
 
@@ -50,7 +51,11 @@ INSTALLED_APPS = [
     'Blog',
     'Articles',
     'Comments',
-]
+    'rest_framework',
+    'django_elasticsearch_dsl',
+    'django_elasticsearch_dsl_drf',
+    'Products'
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -67,8 +72,7 @@ ROOT_URLCONF = 'Blog_api.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -77,6 +81,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+
         },
     },
 ]
@@ -135,10 +140,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = '/static/'
 
 # celery setting.
 CELERY_CACHE_BACKEND = 'default'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
 # django setting.
 CACHES = {
     'default': {
@@ -146,3 +153,26 @@ CACHES = {
         'LOCATION': 'my_cache_table',
     }
 }
+LOGIN_REDIRECT_URL = "/articles/"
+LOGOUT_REDIRECT_URL = '/'
+
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': 'localhost:9200'
+    },
+}
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST_USER="radziszewski.aleksander@gmail.com"
+EMAIL_HOST="smtp.gmail.com"
+EMAIL_PORT=587
+EMAIL_HOST_PASSWORD="arkadiusz1"
+EMAIL_USE_TLS=True
+
+DJANGO_EMAIL_ADMINS_BACKEND = os.environ.get(
+    "DJANGO_EMAIL_ADMINS_BACKEND", "django.core.mail.backends.console.EmailBackend"
+)
+LOGGING_CONFIG = None

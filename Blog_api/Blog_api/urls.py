@@ -15,15 +15,29 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-import Articles,Comments
+import Articles, Comments, Products
 from Articles import views
 from Comments import views
+from Products import views
 import Blog
 from Blog import views
 
 urlpatterns = [
+    path('', Blog.views.LoginBlogView.as_view(), name="login"),
     path('admin/', admin.site.urls),
+    path('articles_list/', Articles.views.ArticlesListView.as_view(), name="articles list"),
     path('entry/', Blog.views.EntryView.as_view(), name="entry"),
-    path('articles/', Articles.views.ArticlesView.as_view(), name="articles"),
-    path('comments/', Comments.views.CommentsView.as_view(), name="comments")
+    path('comments_list/', Comments.views.CommentsListView.as_view(), name="comments list"),
+    path('add_comment/<int:article_id>/', Comments.views.CommentsAddView.as_view(), name="comment add"),
+    path('article_add/', Articles.views.ArticlesAddView.as_view(), name="article add"),
+    path('articles/<int:article_id>/comments/', Articles.views.ArticleDetailView.as_view(), name="article detail"),
+    path('articles/_search', Articles.views.SearchView.as_view(), name="search_article"),
+    path('add_product_to_cart/', Products.views.AddProductToCartView.as_view(), name="add product"),
+    path('create_profile/', Blog.views.CreateProfileView.as_view(), name="create profile"),
+    path('products_list/', Products.views.ProductListView.as_view(), name="products list"),
+    path('logout/', Blog.views.LogOutView.as_view(), name='logout'),
+    path('cart_display/<int:pk>', Products.views.CartDisplayView.as_view(), name="cart display"),
+    path('change_quantity/<int:product_id>', Products.views.ChangeQuantity.as_view(), name="change quantity"),
+    path('confirm_order/', Products.views.ConfirmOrderView.as_view(), name="confirm order"),
+
 ]
