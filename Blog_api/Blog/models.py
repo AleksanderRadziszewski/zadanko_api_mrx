@@ -9,4 +9,7 @@ class Entry(models.Model):
     pub_date = models.DateTimeField(null=True,auto_now_add=True)
     comments_count = models.IntegerField(null=True)
 
+    def __str__(self):
+        return self.title
+
 

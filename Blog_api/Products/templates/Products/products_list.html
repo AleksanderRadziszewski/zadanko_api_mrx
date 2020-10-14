@@ -1,0 +1,8 @@
+<ul>
+    {% for product in object_list %}
+        <li>Name: {{ product.name }}, Price: {{ product.price }}
+            <button class="add" data-id="{{ product.id }}">add to cart</button>
+        </li>
+    {% endfor %}
+<a href="{% url "cart display" user.pk%}"> <button class="add" data-id="{{ product.id }}">cart display</button></a>
+</ul>

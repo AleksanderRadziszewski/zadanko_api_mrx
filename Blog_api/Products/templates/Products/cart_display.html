@@ -1,0 +1,22 @@
+{% load static %}
+<script src="{% static "app.js"%}" ></script>
+<script src="{% static "jquery-3.5.1.min.js"%}"></script>
+ <div class="text-center">
+        {% for kp in object.cartproducts_set.all %}
+            Name: {{ kp.product.name }}<br>
+            Price: {{ kp.product.price }} zł<br>
+            Quanity: {{ kp.quantity }}szt <br>
+            <form method="POST" action="/change_quantity/{{ kp.product.id }}">
+                {% csrf_token %}
+                <input id="increase" class="btn btn-primary btn-sm mr-2" type="submit" value="+" name="type">
+                <input id="decrease" class="btn btn-primary btn-sm mr-2" type="submit" value="-" name="type">
+                <input id="decrease" class="btn btn-primary btn-sm mr-2" type="submit" value="delete" name="type">
+            </form><br>
+        {% endfor %}
+
+ <a href="{% url "products list" %}"><button> back to product list</button></a>
+ <p></p>
+
+
+ <a href="{% url "confirm order" %}"><button> go to order</button></a>
+ </div>
