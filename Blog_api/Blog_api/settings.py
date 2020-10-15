@@ -10,18 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
+
 import os
-
-
 
 SECRET_KEY = 'uk8gs7r-$9smxe709kur=5m&-5_4zk(zttu1&l$9ry)^c%bht+'
 
-
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-
-
-import Blog_api
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -38,7 +32,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -54,8 +47,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_elasticsearch_dsl',
     'django_elasticsearch_dsl_drf',
-    'Products'
-    ]
+    'Products',
+    'social_django'
+]
+SOCIAL_AUTH_POSTGRES_JSONFIELD = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -65,6 +60,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'Blog_api.urls'
@@ -80,14 +76,23 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
+
             ],
 
         },
     },
 ]
+AUTHENTICATION_BACKENDS = [
 
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.github.GithubOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+
+]
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
 WSGI_APPLICATION = 'Blog_api.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -102,7 +107,6 @@ DATABASES = {
         'PORT': 5433
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -122,7 +126,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
@@ -135,7 +138,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
@@ -153,8 +155,16 @@ CACHES = {
         'LOCATION': 'my_cache_table',
     }
 }
-LOGIN_REDIRECT_URL = "/articles/"
+LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = '/'
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+
+SOCIAL_AUTH_FACEBOOK_KEY = '1755543294602442'  # Facebook App	ID
+SOCIAL_AUTH_FACEBOOK_SECRET = '9f1e7b914954bc01082cd891ac70cd7b'  # Facebook App Secret
+
+SOCIAL_AUTH_GITHUB_KEY = '5559ef20022a4cd527ab'     # github id
+SOCIAL_AUTH_GITHUB_SECRET = '0ab282f470082782b44b0651bf40ecc886e89d31'  # github secret key
 
 ELASTICSEARCH_DSL = {
     'default': {
@@ -165,12 +175,12 @@ ELASTICSEARCH_DSL = {
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
-EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST_USER="radziszewski.aleksander@gmail.com"
-EMAIL_HOST="smtp.gmail.com"
-EMAIL_PORT=587
-EMAIL_HOST_PASSWORD="arkadiusz1"
-EMAIL_USE_TLS=True
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST_USER = "radziszewski.aleksander@gmail.com"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_HOST_PASSWORD = "arkadiusz1"
+EMAIL_USE_TLS = True
 
 DJANGO_EMAIL_ADMINS_BACKEND = os.environ.get(
     "DJANGO_EMAIL_ADMINS_BACKEND", "django.core.mail.backends.console.EmailBackend"

@@ -1,13 +1,16 @@
 from django.contrib.auth.models import User
 from django.db import models
 
+
 class Product(models.Model):
-    name=models.CharField(max_length=50)
-    price=models.FloatField()
+    name = models.CharField(max_length=50)
+    price = models.FloatField()
+
 
 class Cart(models.Model):
     client = models.OneToOneField(User, on_delete=models.CASCADE)
     products = models.ManyToManyField(Product, through="CartProducts")
+
 
 class CartProducts(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)

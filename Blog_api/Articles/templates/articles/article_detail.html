@@ -4,6 +4,9 @@
         Created: {{ article.created }}<br>
         Modified: {{ article.modified }}<br>
         Publication date: {{ article.pub_date }}<br>
-        Comment amount: {{ article.comments_count}}
+        Comment amount: {{ article.comments_count }}
     </li>
 </ul>
+<a href="{% url "articles list" %}">
+    <button>back</button>
+</a>

@@ -1,15 +1,23 @@
 {% load static %}
-<script src="{% static "app.js"%}" ></script>
-<script src="{% static "jquery-3.5.1.min.js"%}"></script>
+<script src="{% static "app.js" %}"></script>
+<script src="{% static "jquery-3.5.1.min.js" %}"></script>
 <ul>
     {% for article in object_list %}
- <li>Title:{{ article.title }}<br>
-     Created:{{ article.created }}<br>
-     Modified:{{ article.modified }}<br>
-     <a href="{% url "article detail" article.id %}"><button>go to this article</button></a></li>
-{% endfor %}
+        <li>Title:{{ article.title }}<br>
+            Created:{{ article.created }}<br>
+            Modified:{{ article.modified }}<br>
+            <a href="{% url "article detail" article.id %}">
+                <button>go to this article</button>
+            </a></li>
+        <p></p>
+    {% endfor %}
 </ul>
 {% if user.is_superuser %}
-<a href="{% url "article add"  %}"><button>add article</button></a>
+    <a href="{% url "article add" %}">
+        <button>add article</button>
+    </a>
+
 {% endif %}
-<a href="/"><button>home</button></a>
+<a href="/">
+    <button>home</button>
+</a>
