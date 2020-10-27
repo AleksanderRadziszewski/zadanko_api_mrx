@@ -52,11 +52,11 @@
 
   ## Celery:
   
-  ### Schema
+   ### Schema
 
   <img width="480" alt="Zrzut ekranu 2020-10-27 o 16 38 38" src="https://user-images.githubusercontent.com/56914063/97325149-f757d900-1872-11eb-8fcb-ce17a51b5b99.png">
   
-  ### Email with total price
+   ### Email with total price
   
 <img width="679" alt="Zrzut ekranu 2020-10-27 o 19 11 11" src="https://user-images.githubusercontent.com/56914063/97345423-56751800-188a-11eb-9ff2-4e82cc694efb.png">
 
