@@ -12,7 +12,7 @@
 
 # Project Structure:
 
-  Project contains five application:
+  ## Project contains five application:
   
   1.Blog with Entry model.Following fields of Entry model:
 
@@ -46,31 +46,43 @@
   	Project hasn't done yet
   
 # Usage illustrations:  	
-  ElasticSearch with autocomplete function:  	
+  ## ElasticSearch with autocomplete function:  	
   
   ![ElasticSearch](https://user-images.githubusercontent.com/56914063/97323190-d2626680-1870-11eb-9fb1-ebb8f333c130.png)
 
-  Celery:
+  ## Celery:
+  
+  ### Schema
 
   <img width="480" alt="Zrzut ekranu 2020-10-27 o 16 38 38" src="https://user-images.githubusercontent.com/56914063/97325149-f757d900-1872-11eb-8fcb-ce17a51b5b99.png">
   
-  Article comments using Celery:
+  ### Email with total price
+  
+<img width="679" alt="Zrzut ekranu 2020-10-27 o 19 11 11" src="https://user-images.githubusercontent.com/56914063/97345423-56751800-188a-11eb-9ff2-4e82cc694efb.png">
+
+    
+  ### Workers
+  ![Zrzut ekranu 2020-10-27 o 19 08 34](https://user-images.githubusercontent.com/56914063/97345592-86242000-188a-11eb-80b6-363efcaaecb9.png)
+
+
+  
+  ## Article comments using Celery:
   
   ![Zrzut ekranu 2020-10-27 o 16 57 38](https://user-images.githubusercontent.com/56914063/97327737-8e259500-1875-11eb-9e60-13fdfe0ebb3c.png)
   
-  Login via Facebook and GitHub:
+  ## Login via Facebook and GitHub:
   
   ![Zrzut ekranu 2020-10-27 o 16 47 21](https://user-images.githubusercontent.com/56914063/97326274-202c9e00-1874-11eb-9168-3ca98d88637a.png)
   
-  Authorization:
+  ## Authorization:
   
   ![Zrzut ekranu 2020-10-27 o 16 49 49](https://user-images.githubusercontent.com/56914063/97326625-7994cd00-1874-11eb-86dc-9620b52dc2eb.png)
 
-  Cart Display:
+  ## Cart Display:
   
   ![Zrzut ekranu 2020-10-27 o 16 48 44](https://user-images.githubusercontent.com/56914063/97326455-510cd300-1874-11eb-9241-afd6e98e339f.png)
 
-  Total price of products:
+  ## Total price of products:
 
   ![Zrzut ekranu 2020-10-27 o 17 03 19](https://user-images.githubusercontent.com/56914063/97328512-6256df00-1876-11eb-8fb6-457f19b3bb41.png)
 
