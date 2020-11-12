@@ -1,9 +1,11 @@
-
+from __future__ import absolute_import
+import os
 from django.core.mail import send_mail
-from Articles.models import Article
+from articles.models import Article
 from .celery import app
-from Comments.models import Comments
+from comments.models import Comments
 
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'blog_api.settings')
 
 @app.task
 def task(article_id):

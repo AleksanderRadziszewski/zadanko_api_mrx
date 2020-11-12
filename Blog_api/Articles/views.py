@@ -1,51 +1,69 @@
+from datetime import date
+
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy, reverse
 from django.views import View
-from django.views.generic import ListView
-from Articles.documents import ArticleDocument
-from Articles.forms import ArticleForm
-from Articles.models import Article
+from django.views.generic import ListView, DeleteView, DetailView, CreateView
+from articles.documents import ArticleDocument
+from articles.forms import ArticleForm, ArticleSearchForm
+from articles.models import Article
 
 
-class ArticlesListView(ListView):
+class ArticlesListView(View):
+
+    def get(self, request):
+        articles_to_show = []
+        articles = Article.objects.all()
+        for article in articles:
+            if article.pub_date:
+                articles_to_show.append(article)
+        return render(request, "articles/article_list.html", {"articles_to_show": articles_to_show})
+
+
+class ArticleDetailView(DetailView):
+    pk_url_kwarg = "article_id"
+    template_name = "articles/article_detail.html"
+    queryset = Article.objects.all()
+
+    def get_object(self, queryset=None):
+            article_id=self.kwargs.get(self.pk_url_kwarg)
+            for article in self.queryset:
+                if article_id!=article.id:
+                    raise AttributeError(
+                         f"No article with id {article_id}"
+                                 )
+                obj=self.queryset.get()
+                return obj
+
+
+class ArticleAddView(CreateView):
+    form_class = ArticleForm
+    success_url = reverse_lazy("articles list")
+    template_name = "Articles/form.html"
+
+
+class ArticleDeleteView(DeleteView):
     model = Article
-    paginate_by = 2
-    template_name = "Articles/article_list.html"
+    success_url = reverse_lazy("articles list")
 
 
-class ArticleDetailView(View):
-    def get(self, request, article_id):
-        article = Article.objects.get(pk=article_id)
-        return render(request, "Articles/article_detail.html",
-                      {"article": article})
-
-
-class ArticlesAddView(View):
+class ArticleSearchView(View):
     def get(self, request):
-        form = ArticleForm()
-        return render(request, "Articles/form.html", {"form": form})
+        form=ArticleSearchForm()
+        return render(request, "articles/autocomplete.html", {"form":form})
 
     def post(self, request):
-        form = ArticleForm(request.POST)
+        form=ArticleSearchForm(request.POST)
         if form.is_valid():
-            Article.objects.create(**form.cleaned_data)
-        return redirect("/articles_list/")
+            s = ArticleDocument.search().query("match_phrase_prefix", title=form.cleaned_data.get("search"))
+            qs = s.to_queryset()
+            titles = []
+            for x in qs:
+                if x:
+                    titles.append(x.title)
+        else:
+            raise ValueError(f"Typing value{form.cleaned_data.get('search')} isn't correct ")
+        return render(request, "articles/autocomplete.html", {"form":form,
+                                                              "titles": titles})
 
 
-class SearchView(View):
-    def get(self, request):
-        return render(request, "articles/autocomplete.html")
-
-    def post(self, request):
-        s = ArticleDocument.search().query("match_phrase_prefix", title=request.POST.get("article_search"))
-
-        qs = s.to_queryset()
-        titles = list()
-        for x in qs:
-            if x is not None:
-                titles.append(x.title)
-                print(titles)
-            else:
-                pass
-        return render(request, "articles/article_api.html", {"titles": titles})
-
-# Create your views here.

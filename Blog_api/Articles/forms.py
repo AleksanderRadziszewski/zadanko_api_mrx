@@ -1,8 +1,10 @@
 from django import forms
-from Articles.models import Article
+from articles.models import Article
 
+class ArticleSearchForm(forms.Form):
+    search=forms.CharField(max_length=50)
 
 class ArticleForm(forms.ModelForm):
     class Meta:
         model = Article
-        exclude = ["comments_count"]
+        fields = ["title", "body", "pub_date"]

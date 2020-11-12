@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.views import View
 from django.views.generic import ListView
 from .forms import AddCommentForm
-from Blog_api.tasks import task
-from Comments.models import Comments
+from blog_api.tasks import task
+from comments.models import Comments
 
 
 class CommentsListView(ListView):
@@ -21,7 +22,7 @@ class CommentsAddView(View):
         if form.is_valid():
             Comments.objects.create(**form.cleaned_data)
             task.delay(article_id)
-        return render(request, "Comments/add_comment.html", {"form": form})
+        return redirect(reverse("articles list"))
 
 
 # Create your views here.

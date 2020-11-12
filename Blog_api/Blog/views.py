@@ -3,10 +3,10 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import FormView, ListView
 from django.db import models
-from Blog.forms import EntryForm
-from Blog.models import Entry
+from blog.forms import EntryForm
+from blog.models import Entry
 from django.contrib.auth.signals import user_logged_in
-from Products.forms import CreateProfileForm
+from products.forms import CreateProfileForm
 
 
 class Profile(models.Model):
