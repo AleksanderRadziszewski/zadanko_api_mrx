@@ -2,9 +2,9 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import DetailView, ListView
-from Blog_api.tasks import email_task
+from blog_api.tasks import email_task
 
-from Products.models import Cart, Product, CartProducts
+from products.models import Cart, Product, CartProducts
 
 
 class AddProductToCartView(View):
@@ -54,7 +54,6 @@ class ChangeQuantity(View):
 
         return redirect(f"/cart_display/{cart.pk}")
 
-# Create your views here.
 
 
 class ProductListView(ListView):

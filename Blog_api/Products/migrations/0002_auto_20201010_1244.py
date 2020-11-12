@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('Products', '0001_initial'),
+        ('products', '0001_initial'),
     ]
 
     operations = [
@@ -25,13 +25,13 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('quantity', models.IntegerField(default=1)),
-                ('cart', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='Products.Cart')),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='Products.Product')),
+                ('cart', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='products.Cart')),
+                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='products.Product')),
             ],
         ),
         migrations.AddField(
             model_name='cart',
             name='products',
-            field=models.ManyToManyField(through='Products.CartProducts', to='Products.Product'),
+            field=models.ManyToManyField(through='products.CartProducts', to='products.Product'),
         ),
     ]

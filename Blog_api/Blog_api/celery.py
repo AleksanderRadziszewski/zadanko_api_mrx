@@ -3,10 +3,15 @@ import os
 from celery import Celery
 
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Blog_api.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'blog_api.settings')
 
 
-app = Celery('Blog_api', backend='amqp://', include=['Blog_api.tasks'])
+# app = Celery('blog_api', backend='amqp://', include=['blog_api.tasks'])
+
+app = Celery('blog_api',
+             broker='amqp://guest@localhost//',
+             backend='amqp://',
+             include=['blog_api.tasks'])
 
 
 app.conf.broker_url = 'redis://localhost:6379/0'

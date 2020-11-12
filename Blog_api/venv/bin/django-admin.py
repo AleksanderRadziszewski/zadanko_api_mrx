@@ -1,4 +1,4 @@
-#!/Users/Aleksander/Desktop/zadanko_api_mrx/Blog_api/venv/bin/python3
+#!/Users/Aleksander/Desktop/zadanko_api_mrx/blog_api/venv/bin/python
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 

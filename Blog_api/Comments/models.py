@@ -1,6 +1,6 @@
 from django.db import models
-from Blog.models import Entry
-from Articles.models import Article
+from blog.models import Entry
+from articles.models import Article
 
 
 class Comments(models.Model):

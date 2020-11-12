@@ -1,6 +1,6 @@
 from django import forms
 
-from Blog.models import Entry
+from blog.models import Entry
 
 
 class EntryForm(forms.ModelForm):

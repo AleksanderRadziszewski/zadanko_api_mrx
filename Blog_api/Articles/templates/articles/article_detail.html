@@ -1,3 +1,5 @@
+{% extends "base.html" %}
+{% block content %}
 <ul>
     <li>Title:{{ article.title }}<br>
         Body: {{ article.body }}<br>
@@ -10,3 +12,4 @@
 <a href="{% url "articles list" %}">
     <button>back</button>
 </a>
+{% endblock content %}
