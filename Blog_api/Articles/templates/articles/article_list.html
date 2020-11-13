@@ -3,21 +3,7 @@
 {% block content %}
 <script src="{% static "app.js" %}"></script>
 <script src="{% static "jquery-3.5.1.min.js" %}"></script>
-<ul>
-    {% for article in articles_to_show %}
-        <li>Title:{{ article.title }}<br>
-            Publish date:{{ article.pub_date}}<br>
-            Created:{{ article.created }}<br>
-            Modified:{{ article.modified }}<br>
-            <a href="{% url "article detail" article.id %}">
-                <button>go to this article</button>
-            </a></li>
-        <p></p>
-        <a href="{% url "comment add" article.id %}">
-            <button>add comment</button>
-        </a>
-    {% endfor %}
-</ul>
+{% include "object_list.html"%}
 {% if user.is_superuser %}
     <a href="{% url "article add" %}">
         <button>add article</button>
