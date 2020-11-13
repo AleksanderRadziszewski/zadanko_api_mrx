@@ -9,15 +9,12 @@ from articles.forms import ArticleForm, ArticleSearchForm
 from articles.models import Article
 
 
-class ArticlesListView(View):
+class ArticlesListView(ListView):
+    model = Article
+    template_name = "object_list.html"
 
-    def get(self, request):
-        articles_to_show = []
-        articles = Article.objects.all()
-        for article in articles:
-            if article.pub_date:
-                articles_to_show.append(article)
-        return render(request, "articles/article_list.html", {"articles_to_show": articles_to_show})
+    def get_queryset(self):
+        return Article.objects.filter(pub_date__isnull=False)
 
 
 class ArticleDetailView(DetailView):
@@ -57,10 +54,13 @@ class ArticleSearchView(View):
         if form.is_valid():
             s = ArticleDocument.search().query("match_phrase_prefix", title=form.cleaned_data.get("search"))
             qs = s.to_queryset()
-            titles = []
-            for x in qs:
-                if x:
+            if qs:
+                titles = []
+                for x in qs:
                     titles.append(x.title)
+            else:
+                raise ValueError(f"No phrase with {form.cleaned_data.get('search')}")
+
         else:
             raise ValueError(f"Typing value{form.cleaned_data.get('search')} isn't correct ")
         return render(request, "articles/autocomplete.html", {"form":form,

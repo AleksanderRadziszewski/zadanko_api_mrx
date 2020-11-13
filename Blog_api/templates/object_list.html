@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<ul>
+{% for object in object_list%}
+    <li>Title:{{ object.title }}<br>
+        Body:{{ object.body}}<br>
+        Publish date:{{ object.pub_date}}<br>
+        Created:{{ object.created }}<br>
+        Modified:{{ object.modified }}<br>
+        Comments count:{{ object.comments_count }}<br>
+    <p></p>
+
+    </li>
+
+{% endfor %}
+</ul>
+{% endblock %}
