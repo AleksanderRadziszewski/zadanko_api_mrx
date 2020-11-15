@@ -55,7 +55,6 @@ class ChangeQuantity(View):
         return redirect(f"/cart_display/{cart.pk}")
 
 
-
 class ProductListView(ListView):
     model = Product
     paginate_by = 2
