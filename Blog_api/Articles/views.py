@@ -36,7 +36,7 @@ class ArticleDetailView(DetailView):
 class ArticleAddView(CreateView):
     form_class = ArticleForm
     success_url = reverse_lazy("articles list")
-    template_name = "Articles/form.html"
+    template_name = "articles/form.html"
 
 
 class ArticleDeleteView(DeleteView):

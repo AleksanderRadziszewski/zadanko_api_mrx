@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% block content %}
 <ul>
     {% for comment in object_list %}
         <li>Body: {{ comment.body }}<br>
@@ -19,3 +20,4 @@
 <a href="/">
     <button>home</button>
 </a>
+{% endblock %}
