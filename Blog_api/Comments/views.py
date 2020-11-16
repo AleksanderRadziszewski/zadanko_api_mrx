@@ -20,7 +20,7 @@ class CommentsListView(ListView):
 class CommentsAddView(View):
     def get(self, request):
         form = AddCommentForm()
-        return render(request, "Comments/add_comment.html", {"form": form})
+        return render(request, "comments/add_comment.html", {"form": form})
 
     def post(self, request, article_id):
         form = AddCommentForm(request.POST)

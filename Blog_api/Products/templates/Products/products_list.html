@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% block content %}
 <ul>
     {% for product in object_list %}
         <li>Name: {{ product.name }}, Price: {{ product.price }}
@@ -13,3 +14,4 @@
 <a href="/">
     <button>home</button>
 </a>
+{% endblock %}

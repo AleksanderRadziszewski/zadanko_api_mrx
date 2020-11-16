@@ -8,7 +8,7 @@ class Product(models.Model):
 
     class Meta:
         verbose_name="Product"
-        verbose_name_plural="Products"
+        verbose_name_plural="products"
 
 
 class Cart(models.Model):
@@ -27,7 +27,7 @@ class CartProducts(models.Model):
 
     class Meta:
         verbose_name="Cart Product"
-        verbose_name_plural="Carts Products"
+        verbose_name_plural="Carts products"
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):

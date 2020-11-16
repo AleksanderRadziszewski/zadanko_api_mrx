@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% block content %}
     <div style="text-align: center">
     {% if not user.is_authenticated %}
         <form method='post' style="text-align: center">
@@ -13,4 +14,4 @@
     {% endif %}
 
     </div>
-
+{% endblock %}

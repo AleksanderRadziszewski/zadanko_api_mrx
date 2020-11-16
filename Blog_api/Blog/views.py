@@ -10,7 +10,7 @@ from products.forms import CreateProfileForm
 class CreateProfileView(CreateView):
     model = Profile
     form_class = CreateProfileForm
-    template_name = "Products/create_profile.html"
+    template_name = "products/create_profile.html"
     success_url = reverse_lazy("login")
 
     def form_valid(self, form):

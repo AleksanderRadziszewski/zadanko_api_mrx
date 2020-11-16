@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='article',
-            options={'verbose_name': 'Article', 'verbose_name_plural': 'Articles'},
+            options={'verbose_name': 'Article', 'verbose_name_plural': 'articles'},
         ),
         migrations.AlterField(
             model_name='article',

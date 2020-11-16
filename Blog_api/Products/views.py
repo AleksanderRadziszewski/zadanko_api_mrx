@@ -3,14 +3,13 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import DetailView, ListView
 from blog_api.tasks import email_task
-
 from products.models import Cart, Product, CartProducts
 
 
 class AddProductToCartView(View):
     def get(self, request):
         products = Product.objects.all()
-        return render(request, "Products/add_product.html", {"products": products})
+        return render(request, "products/add_product.html", {"products": products})
 
     def post(self, request):
         cart, created = Cart.objects.get_or_create(client=request.user)
@@ -22,7 +21,7 @@ class AddProductToCartView(View):
 class CartDisplayView(DetailView):
     model = Cart
     fields = "__all__"
-    template_name = "Products/cart_display.html"
+    template_name = "products/cart_display.html"
 
     def get_context_data(self, **kwargs):
         total_products = CartProducts.objects.filter(
@@ -58,7 +57,7 @@ class ChangeQuantity(View):
 class ProductListView(ListView):
     model = Product
     paginate_by = 2
-    template_name = "Products/products_list.html"
+    template_name = "products/products_list.html"
 
 
 class ConfirmOrderView(View):
@@ -67,7 +66,7 @@ class ConfirmOrderView(View):
         products_cart = CartProducts.objects.filter(cart=cart)
         total_price = sum([product_cart.product.price *
                            product_cart.quantity for product_cart in products_cart])
-        return render(request, "Products/order.html", {"products_cart": products_cart,
+        return render(request, "products/order.html", {"products_cart": products_cart,
                                                        "total_price": total_price})
 
     def post(self, request):
