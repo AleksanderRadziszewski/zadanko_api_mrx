@@ -31,7 +31,7 @@ user_logged_in.connect(create_profile)
 class EntryView(View):
     def get(self, request):
         form = EntryForm()
-        return render(request, "Blog/form.html", {"form": form})
+        return render(request, "blog/form.html", {"form": form})
 
     def post(self, request):
         form = EntryForm(request.POST)
