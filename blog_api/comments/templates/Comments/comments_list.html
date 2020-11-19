@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<ul>
+    {% for comment in object_list %}
+        <li>Body: {{ comment.body }}<br>
+            Created:{{ comment.created }}<br>
+            Entry: {{ comment.entry }}<br>
+            Article:{{ comment.article }}<br>
+        </li>
+        <p></p>
+        <a href="{% url "comment add" comment.article.id %}">
+            <button>add comment</button>
+        </a>
+
+    {% endfor %}
+
+</ul>
+
+<a href="/">
+    <button>home</button>
+</a>
+{% endblock %}

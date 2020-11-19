@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load  static %}
+{% block content %}
+<script src="{% static "app.js" %}"></script>
+<script src="{% static "jquery-3.5.1.min.js" %}"></script>
+{% include "object_list.html"%}
+{% if user.is_superuser %}
+    <a href="{% url "article add" %}">
+        <button>add article</button>
+    </a>
+
+{% endif %}
+<a href="/">
+    <button>home</button>
+</a>
+{% endblock content %}

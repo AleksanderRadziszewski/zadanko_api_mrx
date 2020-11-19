@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+<script src="{% static "app.js"%}" ></script>
+<script src="{% static "jquery-3.5.1.min.js"%}"></script>
+<form method="post" action="">
+{% csrf_token %}
+{% if user.is_authenticated %}
+             <h8 style="float:right;margin-right: 4px">Hi {{ user.first_name }} !</h8>
+            <a href="{% url "logout"%}"><button>log out</button></a>
+            <a href="{% url "products list"%}"><button>products list</button></a>
+
+        {% endif %}
+<ul>
+{% for product in products %}
+    <li>Name: {{ product.name }},  Price: {{ product.price }} <a href="{% url "cart display" user.id %}"> <button class="add" data-id="{{ product.id }}">add to cart</button></a></li>
+{% endfor %}
+</ul>
+</form>
+<a href="{% url "cart display" user.pk%}"> <button class="add" data-id="{{ product.id }}">cart display</button></a>
+
